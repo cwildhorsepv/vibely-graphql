@@ -11,4 +11,4 @@ RUN npm install -g postgraphile
 EXPOSE 5000
 
 # Default command
-CMD ["sh", "-c", "postgraphile --connection \"$DATABASE_URL?sslmode=require\" --schema public --port 5000 --enhance-graphiql --dynamic-json"]
+CMD sh -c "postgraphile --connection '$${DATABASE_URL}?sslmode=require' --schema public --port 5000 --enhance-graphiql --dynamic-json"
