@@ -1,0 +1,15 @@
+# render.yaml
+services:
+  - type: web
+    name: vibely-graphql
+    runtime: docker
+    repo: https://github.com/your-org-or-user/vibely-graphql
+    branch: main
+    dockerfilePath: ./Dockerfile
+    envVars:
+        - key: DATABASE_URL
+        value:postgres://vibely_admin_visitor:pb34e452b55a6fe2a27bcce98f0cf2c28c60a989eb807998d7b4330741ca43e08@ec2-52-70-153-103.compute-1.amazonaws.com:5432/djdhsss5mep4v
+      - key: PGSSLMODE
+        value: require
+      - key: NODE_ENV
+        value: production
