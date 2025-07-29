@@ -1,5 +1,4 @@
-#!/bin/sh
 echo "🔍 Runtime environment variables:"
 echo "--------------------------------"
-printenv | sort
+printenv
 echo "--------------------------------"
