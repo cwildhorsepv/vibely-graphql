@@ -1,5 +1,6 @@
 #!/bin/sh
 echo "🔍 Runtime environment variables:"
 echo "--------------------------------"
-printenv
+echo "DATABASE URL:"
+echo "$DATABASE_URL"
 echo "--------------------------------"
