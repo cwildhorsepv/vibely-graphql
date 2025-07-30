@@ -9,7 +9,6 @@ RUN apt-get update \
 
 # 🔒 Copy the Neon CA and update trust
 COPY ./neon-ca.pem /usr/local/share/ca-certificates/neon-ca.crt
-COPY ./neon-ca.pem /neon-ca.pem
 RUN update-ca-certificates
 
 ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/neon-ca.crt
