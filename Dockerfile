@@ -2,16 +2,23 @@ FROM node:20-slim
 
 WORKDIR /app
 
-# 🛠 Install cert support
-RUN apt-get update && apt-get install -y ca-certificates
+# 🛠 Install required system packages and CA tools
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# 🔒 Add trusted Neon-compatible CA
-COPY ./neon-ca.crt /usr/local/share/ca-certificates/neon-ca.crt
+# 🔒 Add the trusted Neon RDS cert bundle
+COPY ./global-bundle.pem /usr/local/share/ca-certificates/neon-ca.crt
 RUN update-ca-certificates
 
-# 🧠 Tell Node to trust it
+# ✅ Let Node trust the CA
 ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/neon-ca.crt
 
+# 🧠 Install PostGraphile globally
+RUN npm install -g postgraphile
+
+# 🧪 Optional debug script
 COPY ./print-env.sh /print-env.sh
 RUN chmod +x /print-env.sh
 
