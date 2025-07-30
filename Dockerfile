@@ -2,14 +2,15 @@ FROM node:20-slim
 
 WORKDIR /app
 
-# 🛠 Install CA management tools
-RUN apt-get update && apt-get install -y ca-certificates
+# 🛠 Install CA tools and PostGraphile
+RUN apt-get update \
+    && apt-get install -y ca-certificates \
+    && npm install -g postgraphile
 
-# 🔒 Copy the Neon root certificate and update trust
+# 🔒 Copy the Neon CA and update trust
 COPY ./neon-ca.pem /usr/local/share/ca-certificates/neon-ca.crt
 RUN update-ca-certificates
 
-# 🧠 Let Node use the trusted cert
 ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/neon-ca.crt
 
 COPY ./print-env.sh /print-env.sh
